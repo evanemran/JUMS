@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="8dp"
         android:layout_margin="8dp"
         app:cardBackgroundColor="@color/white">
@@ -26,19 +26,32 @@
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <Spinner
-                android:id="@+id/spinner"
-                android:tooltipText="Select here"
-                android:padding="8dp"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:tooltipText="Select here"
+                    android:padding="8dp"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"/>
+                <ImageButton
+                    android:id="@+id/button_search"
+                    android:src="@drawable/ic_search"
+                    android:backgroundTint="@color/purple_700"
+                    android:textAllCaps="false"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="0dp"
         android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
