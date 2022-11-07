@@ -8,5 +8,10 @@
         <item>Desert</item>
         <item>Drinks</item>
     </string-array>
+    
+    
+    <string name="roasted_mushroom">
+        Trim stems from mushrooms. Finely chop. Heat a non-stick frying pan over medium heat. Spray with oil. Cook the onion, stirring, for 5 minutes. Add mushroom stem. Cook for 3 minutes or until soft. Add the garlic and cook, stirring, for 1 minute or until aromatic.
+    </string>
 
 </resources>

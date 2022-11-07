@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -19,9 +20,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     Context context;
     List<Menu> list;
 
-    public MenuAdapter(Context context, List<Menu> list) {
+    //listener added for Assignment 3
+    ClickListener listener;
+
+    public MenuAdapter(Context context, List<Menu> list, ClickListener listener) {
         this.context = context;
         this.list = list;
+        this.listener = listener;
     }
 
     @NonNull
@@ -34,6 +39,13 @@ public class MenuAdapter extends RecyclerView.Adapter<MenuViewHolder> {
     public void onBindViewHolder(@NonNull MenuViewHolder holder, int position) {
         holder.textView_menu.setText(list.get(position).name);
         Picasso.get().load(list.get(position).image).into(holder.imageView_menu);
+
+        holder.menu_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClicked(list.get(holder.getAdapterPosition()));
+            }
+        });
     }
 
     @Override
@@ -46,11 +58,13 @@ class MenuViewHolder extends RecyclerView.ViewHolder {
 
     ImageView imageView_menu;
     TextView textView_menu;
+    CardView menu_container;
 
     public MenuViewHolder(@NonNull View itemView) {
         super(itemView);
 
         imageView_menu = itemView.findViewById(R.id.imageView_menu);
         textView_menu = itemView.findViewById(R.id.textView_menu);
+        menu_container = itemView.findViewById(R.id.menu_container);
     }
 }
