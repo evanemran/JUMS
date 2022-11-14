@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/JUMS/Visiting_Card/app/src/main/res/drawable/ic_call.xml" value="0.1415" />
         <entry key="..\:/JUMS/Visiting_Card/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/JUMS/Visiting_Card/app/src/main/res/layout/dialog_tel.xml" value="0.1921875" />
       </map>
     </option>
   </component>
