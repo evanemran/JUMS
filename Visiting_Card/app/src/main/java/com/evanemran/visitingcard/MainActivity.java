@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.mail_container:
                     email("evan.sil@squaregroup.com");
                     break;
+                case R.id.web_container:
+                    openUrl("https://squareit.com.bd/");
             }
         }
     };
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
     private void sms(String number) {
 
         if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE},100);
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS},101);
         }
         else {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
@@ -112,5 +114,10 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    private void openUrl(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 }
