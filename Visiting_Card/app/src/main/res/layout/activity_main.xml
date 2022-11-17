@@ -85,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:id="@+id/address_container"
                     android:text="48 Mohakhali C/A, Dhaka-1212, Bangladesh."
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -228,6 +229,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/sq_website_container"
                     android:layout_width="match_parent"
                     android:textSize="16sp"
                     android:textColor="@color/white"

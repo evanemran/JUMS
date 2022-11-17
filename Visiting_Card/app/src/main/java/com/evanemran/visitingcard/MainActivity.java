@@ -19,9 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout tel_container, mail_container, web_container, helpline_container;
+    TextView address_container, sq_website_container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,10 @@ public class MainActivity extends AppCompatActivity {
         web_container.setOnClickListener(clickListener);
         helpline_container = findViewById(R.id.helpline_container);
         helpline_container.setOnClickListener(clickListener);
+        address_container = findViewById(R.id.address_container);
+        address_container.setOnClickListener(clickListener);
+        sq_website_container = findViewById(R.id.sq_website_container);
+        sq_website_container.setOnClickListener(clickListener);
 
 
     }
@@ -52,6 +59,16 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.web_container:
                     openUrl("https://squareit.com.bd/");
+                    break;
+                case R.id.address_container:
+                    openLocation(23.777654383336465, 90.40564976441003);
+                    break;
+                case R.id.sq_website_container:
+                    openUrl("https://squaregroup.com/");
+                    break;
+                case R.id.helpline_container:
+                    showTelDialog("09613707070");
+                    break;
             }
         }
     };
@@ -87,8 +104,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void call(String number) {
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.CALL_PHONE},100);
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.CALL_PHONE},100);
         }
         else {
             Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -99,8 +118,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void sms(String number) {
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS},101);
+        if (ContextCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.SEND_SMS},101);
         }
         else {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", number, null)));
@@ -108,16 +129,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void email(String address) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, address);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{ address});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Regarding Visiting Card");
+        email.putExtra(Intent.EXTRA_TEXT, "Hello");
+
+        //need this to prompts email client only
+        email.setType("message/rfc822");
+
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
     }
 
     private void openUrl(String url) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         startActivity(browserIntent);
+    }
+
+    private void openLocation(double latitude, double longitude) {
+        String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(intent);
     }
 }

@@ -153,6 +153,8 @@ public class MainActivity extends AppCompatActivity {
         recycler_menu.setAdapter(adapter);
     }
 
+
+    //click listener to show data in new activity
     private final ClickListener clickListener = new ClickListener() {
         @Override
         public void onClicked(Menu menu) {
